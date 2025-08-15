@@ -4,19 +4,19 @@ require_once("./app/config/database.php");
 class Colaboradores
 {
     public $id;
-    public $nome;
-    public $telefone;
-    public $email;
+    public $nome_colaborador;
+    public $telefone_colaborador;
+    public $email_colaborador;
 
-    public function __construct($id, $nome, $telefone, $email)
+    public function __construct($id, $nome_colaborador, $telefone_colaborador, $email_colaborador)
     {
         $this->id = $id;
-        $this->nome = $nome;
-        $this->telefone = $telefone;
-        $this->email = $email;
+        $this->nome_colaborador = $nome_colaborador;
+        $this->telefone_colaborador = $telefone_colaborador;
+        $this->email_colaborador = $email_colaborador;
     }
 
-    public function createColaborador($dados)
+    public static function createColaborador($dados)
     {
         $conn = Database::conection();
 
@@ -30,6 +30,6 @@ class Colaboradores
         $stmt->execute();
 
         $novoId = $conn->lastInsertId();
-        return new self($dados['nome_colaborador'], $dados['telefone_colaborador'], $dados['email_colaborador'], $novoId);
+        return new self($novoId, $dados['nome_colaborador'], $dados['telefone_colaborador'], $dados['email_colaborador']);
     }
 }

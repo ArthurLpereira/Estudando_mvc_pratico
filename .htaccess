@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    # Ativa o motor de reescrita
+    RewriteEngine On
+
+    # Redireciona a requisição para a pasta raiz, se necessário
+    RewriteBase /arthur/estudando_mvc_pratico/
+
+    # Se o arquivo ou pasta solicitado existir, não faça nada
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Se o arquivo ou pasta não existir, redireciona tudo para o index.php
+    # O [QSA,L] garante que os parâmetros da URL sejam mantidos
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
