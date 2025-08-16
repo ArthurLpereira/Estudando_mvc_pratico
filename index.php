@@ -19,6 +19,12 @@ if ($request_uri == '/index.php') {
     $controller->ShowAllColaboradores();
 } elseif (preg_match('/^\/colaboradores\/visualizar\/(\d+)$/', $request_uri, $matches)) {
     $controller->ShowOneColaborador($matches[1]);
+} elseif (preg_match('/^\/colaboradores\/editar\/(\d+)$/', $request_uri, $matches)) {
+    $controller->ShowEditForm($matches[1]);
+} elseif (preg_match('/^\/colaboradores\/update\/(\d+)$/', $request_uri, $matches) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    $controller->updateColaborador($matches[1]);
+} elseif (preg_match('/^\/colaboradores\/deletar\/(\d+)$/', $request_uri, $matches)) {
+    $controller->deleteColaborador($matches[1]);
 } else {
     echo 'Página não encontrada';
 }

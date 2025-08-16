@@ -57,4 +57,29 @@ class Colaboradores
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public static function updateColaborador($id, $dados)
+    {
+        $conn = Database::conection();
+        $sql = "UPDATE colaboradores SET nome_colaborador= :nome,telefone_colaborador= :telefone,email_colaborador= :email WHERE id_colaborador = :id";
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':nome', $dados['nome_colaborador']);
+        $stmt->bindParam(':telefone', $dados['telefone_colaborador']);
+        $stmt->bindParam(':email', $dados['email_colaborador']);
+
+        return $stmt->execute();
+    }
+
+    public static function deleteColaborador($id)
+    {
+        $conn = Database::conection();
+        $sql = "DELETE FROM colaboradores WHERE id_colaborador = :id";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
 }

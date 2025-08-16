@@ -12,12 +12,10 @@
             width: 80%;
             margin: 2em auto;
             border-collapse: collapse;
-            /* Remove as bordas duplas */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
-            /* Garante que a borda arredondada se aplique */
         }
 
         /* Estilos para o cabeçalho da tabela */
@@ -48,7 +46,7 @@
         }
 
         /* Estilos para o link "Voltar" */
-        a {
+        .back-link {
             display: inline-block;
             margin: 1em;
             padding: 0.8em 1.5em;
@@ -59,11 +57,11 @@
             transition: background-color 0.3s ease;
         }
 
-        a:hover {
+        .back-link:hover {
             background-color: #5a6268;
         }
 
-        /* Estilos para o container principal (se você quiser centralizar tudo) */
+        /* Estilos para o container principal */
         .table-container {
             padding: 2em;
             background-color: #f4f4f9;
@@ -81,7 +79,7 @@
 <body>
     <div class="table-container">
         <h1>Lista de Colaboradores</h1>
-        <a href="/arthur/estudando_mvc_pratico/index.php">Voltar para o formulário</a>
+        <a class="back-link" href="/arthur/estudando_mvc_pratico/index.php">Voltar para o formulário</a>
         <br><br>
 
         <table border="1">
@@ -99,27 +97,37 @@
                 if (!empty($colaboradores)) {
                     foreach ($colaboradores as $colaborador) {
                 ?>
-                <tr>
-                    <td>
-                        <?php echo htmlspecialchars($colaborador['id_colaborador']); ?>
-                    </td>
-                    <td>
-                        <?php echo htmlspecialchars($colaborador['nome_colaborador']); ?>
-                    </td>
-                    <td>
-                        <?php echo htmlspecialchars($colaborador['telefone_colaborador']); ?>
-                    </td>
-                    <td>
-                        <?php echo htmlspecialchars($colaborador['email_colaborador']); ?>
-                    </td>
-                    <td><a
-                            href="/arthur/estudando_mvc_pratico/colaboradores/visualizar/<?php echo htmlspecialchars($colaborador['id_colaborador']);?>">Visualizar</a>
-                    </td>
-                </tr>
-                <?php
+                        <tr>
+                            <td>
+                                <?php echo htmlspecialchars($colaborador['id_colaborador']); ?>
+                            </td>
+                            <td>
+                                <?php echo htmlspecialchars($colaborador['nome_colaborador']); ?>
+                            </td>
+                            <td>
+                                <?php echo htmlspecialchars($colaborador['telefone_colaborador']); ?>
+                            </td>
+                            <td>
+                                <?php echo htmlspecialchars($colaborador['email_colaborador']); ?>
+                            </td>
+                            <td>
+                                <a
+                                    href="/arthur/estudando_mvc_pratico/colaboradores/visualizar/<?php echo htmlspecialchars($colaborador['id_colaborador']); ?>">Visualizar</a>
+
+                                <a href="/arthur/estudando_mvc_pratico/colaboradores/editar/<?php echo htmlspecialchars($colaborador['id_colaborador']); ?>">Edite</a>
+
+                                <a href="/arthur/estudando_mvc_pratico/colaboradores/deletar/<?php echo htmlspecialchars($colaborador['id_colaborador']); ?>">Delete</a>
+
+                            </td>
+                        </tr>
+                    <?php
                     }
                 } else {
-                    echo "<tr><td colspan='5'>Nenhum colaborador encontrado.</td></tr>";
+                    ?>
+                    <tr>
+                        <td colspan='5'>Nenhum colaborador encontrado.</td>
+                    </tr>
+                <?php
                 }
                 ?>
             </tbody>
