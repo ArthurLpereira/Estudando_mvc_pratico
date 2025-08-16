@@ -25,8 +25,26 @@ class ColaboradoresController
             echo "<p>ID:'$colaboradoresCreate->id'</p>";
             echo "<p>Telefone:'$colaboradoresCreate->telefone_colaborador'</p>";
             echo "<p>Email:'$colaboradoresCreate->email_colaborador'</p>";
+            header("Location: /arthur/estudando_mvc_pratico/index.php");
         } catch (PDOException $e) {
             echo "<h3>Erro ao cadastrar a disciplina</h3>";
+        }
+    }
+
+    public function ShowAllColaboradores()
+    {
+        $colaboradores = Colaboradores::readAllColaboradores();
+        include "./app/views/colaboradores/listColaboradores.html";
+    }
+
+    public function ShowOneColaborador($id)
+    {
+        $colaborador = Colaboradores::ReadOneColaborador($id);
+
+        if ($colaborador) {
+            include "./app/views/colaboradores/listOneColaborador.html";
+        } else {
+            echo ('Colaborador não encontrado');
         }
     }
 }

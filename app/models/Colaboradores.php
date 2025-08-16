@@ -32,4 +32,29 @@ class Colaboradores
         $novoId = $conn->lastInsertId();
         return new self($novoId, $dados['nome_colaborador'], $dados['telefone_colaborador'], $dados['email_colaborador']);
     }
+
+    public static function readAllColaboradores()
+    {
+        $conn = Database::conection();
+        $sql = "SELECT * FROM colaboradores";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $colaboradores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $colaboradores;
+    }
+
+    public static function ReadOneColaborador($id)
+    {
+        $conn = Database::conection();
+
+        $sql = "SELECT id_colaborador, nome_colaborador, telefone_colaborador, email_colaborador FROM colaboradores WHERE id_colaborador=:id";
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
